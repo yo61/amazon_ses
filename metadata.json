@@ -1,6 +1,6 @@
 {
   "name": "conzar-amazon_ses",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "conzar",
   "summary": "Sets up smtp through postfix for Amazon SES.",
   "license": "GPLv3",
