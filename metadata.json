@@ -3,10 +3,19 @@
   "version": "0.0.2",
   "author": "conzar",
   "summary": "Sets up smtp through postfix for Amazon SES.",
-  "license": "GPLv3",
+  "license": "GPL-3.0+",
   "source": "git://github.com/Conzar/amazon_ses.git",
   "project_page": "https://github.com/Conzar/amazon_ses",
   "issues_url": "https://github.com/Conzar/amazon_ses/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04"
+      ]
+    }
+  ],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",

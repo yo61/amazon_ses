@@ -26,15 +26,15 @@ class amazon_ses::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
-    content => template('amazon_ses/sasl_passwd.erb') 
+    content => template('amazon_ses/sasl_passwd.erb')
   }
   
   # create the db
   exec { 'create_db_file':
-    command       => '/usr/sbin/postmap -r hash:/etc/postfix/sasl_passwd',
-    cwd           => '/etc/postfix',
-    refreshonly   => true,
-    subscribe     => File['/etc/postfix/sasl_passwd'],
+    command     => '/usr/sbin/postmap -r hash:/etc/postfix/sasl_passwd',
+    cwd         => '/etc/postfix',
+    refreshonly => true,
+    subscribe   => File['/etc/postfix/sasl_passwd'],
   }
 
   # manage the postfix main configuration file 
