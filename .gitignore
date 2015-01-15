@@ -2,3 +2,4 @@ pkg
 *.swp
 *.swo
 Gemfile.lock
+*.so
