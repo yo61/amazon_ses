@@ -10,7 +10,7 @@
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
 class { 'amazon_ses':
-  domain => 'test.com',
+  domain        => 'test.com',
   smtp_username => 'USERNAME',
   smtp_password => 'PASSWORD',
 }

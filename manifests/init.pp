@@ -75,14 +75,13 @@ class amazon_ses (
   $smtp_username,
   $smtp_password,
   $ses_region = 'US EAST',
- ){
-   
-  anchor { 'amazon_ses::begin':
-  }
+){
+
+  anchor { 'amazon_ses::begin': }
 
   # check for OS Family
   case $::osfamily {
-   'debian': {
+    'debian': {
       # debian (so ubuntu and debian are only supported)
     }
     default: {
@@ -94,24 +93,24 @@ class amazon_ses (
   # set the region specific details
   case $ses_region {
     'US EAST': {
-      $region_url = "email-smtp.us-east-1.amazonaws.com:${smtp_port}"
+      $region_url  = "email-smtp.us-east-1.amazonaws.com:${smtp_port}"
       $region_url2 = "ses-smtp-prod-335357831.us-east-1.elb.amazonaws.com:\
 ${smtp_port}"
-               }
+    }
     'US WEST': {
       $region_url = "email-smtp.us-west-2.amazonaws.com:${smtp_port}"
       $region_url2 = "ses-smtp-us-west-2-prod-14896026.us-west-2.elb.\
 amazonaws.com:${smtp_port}"
-               }
+    }
     'EU':      {
       $region_url = ":${smtp_port}"
       $region_url2 = "ses-smtp-eu-west-1-prod-345515633.eu-west-1.elb.\
 amazonaws.com:${smtp_port}"
-               }
+    }
     default:   {
-                # throw error 
-                fail("Invalid ses_region - ${ses_region}")
-               }
+      # throw error 
+      fail("Invalid ses_region - ${ses_region}")
+    }
   }
   
   class {'amazon_ses::install':

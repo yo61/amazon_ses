@@ -1,16 +1,6 @@
 # amazon_ses
 
-#### Table of Contents
-
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with amazon_ses](#setup)
-    * [What amazon_ses affects](#what-amazon_ses-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with amazon_ses](#beginning-with-amazon_ses)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+[![Build Status](https://travis-ci.org/Conzar/amazon_ses.svg?branch=master)](https://travis-ci.org/Conzar/amazon_ses)
 
 ## Overview
 
