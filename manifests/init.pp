@@ -92,12 +92,12 @@ class amazon_ses (
 
   # check for OS Family
   case $::osfamily {
-    'debian': {
+    'debian', 'fedora', 'redhat': {
       # debian (so ubuntu and debian are only supported)
+      # we also support RedHat/CentOS and Fedora
     }
     default: {
-      fail("${::osfamily} - Unsupported OS Family.\
- Debian is the only supported os family")
+      fail("${::osfamily} - Unsupported OS Family")
     }
   }
 

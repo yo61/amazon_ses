@@ -14,7 +14,9 @@
 # GPLv3
 #
 class amazon_ses::install {
-  package { ['libsasl2-modules', 'postfix' ]:
+
+  include ::amazon_ses::params
+  package { $::amazon_ses::params::package_names:
       ensure => installed,
   }
 }
