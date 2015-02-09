@@ -9,12 +9,14 @@
 # === Authors
 #
 # Michael Speth <spethm@landcareresearch.co.nz>
+# Robin Bowes <robin.bowes@yo61.com>
 #
 # === Copyright
 # GPLv3
 #
 class amazon_ses::service {
   service { 'postfix':
+    enable => true,
     ensure => running,
   }
 }
