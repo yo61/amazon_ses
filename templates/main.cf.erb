@@ -32,3 +32,4 @@ smtp_sasl_tls_security_options = noanonymous
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
 smtp_tls_security_level = encrypt
 smtp_tls_note_starttls_offer = yes
+smtp_tls_CAfile = <%= scope.lookupvar('amazon_ses::params::ca_bundle') %>

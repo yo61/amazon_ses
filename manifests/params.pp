@@ -20,4 +20,9 @@ class amazon_ses::params{
     default  => 'postfix',
   }
 
+  $ca_bundle = $::osfamily ? {
+    'debian' => '/etc/ssl/certs/ca-certificates.crt',
+    default  => '/etc/pki/tls/cert.pem',
+  }
+
 }
