@@ -35,6 +35,14 @@
 #   * 'EU' - The (Ireland) Region
 #   The default region is 'US EAST'
 #
+# [*inet_interfaces*]
+#   The interfaces to which postfix should bind
+#   Default: 'all'
+#
+# [*inet_interfaces*]
+#   The protocols postfix should use
+#   Default: 'ipv4'
+#
 # === Variables
 #
 # [*region_url*] 
@@ -65,6 +73,7 @@
 # === Authors
 #
 # Michael Speth <spethm@landcareresearch.co.nz>
+# Robin Bowes <robin.bowes@yo61.com>
 #
 # === Copyright
 # GPLv3
@@ -75,6 +84,8 @@ class amazon_ses (
   $smtp_username,
   $smtp_password,
   $ses_region = 'US EAST',
+  $inet_interfaces = 'all',
+  $inet_protocols = 'all',
 ){
 
   anchor { 'amazon_ses::begin': }
