@@ -7,9 +7,9 @@ append_dot_mydomain = no
 readme_directory = no
 
 # TLS parameters
-smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-smtpd_use_tls=yes
+smtpd_tls_cert_file = <%= scope.lookupvar('amazon_ses::smtpd_tls_cert_file') %>
+smtpd_tls_key_file = <%= scope.lookupvar('amazon_ses::smtpd_tls_key_file') %>
+smtpd_use_tls = yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
@@ -32,4 +32,4 @@ smtp_sasl_tls_security_options = noanonymous
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
 smtp_tls_security_level = encrypt
 smtp_tls_note_starttls_offer = yes
-smtp_tls_CAfile = <%= scope.lookupvar('amazon_ses::params::ca_bundle') %>
+smtp_tls_CAfile = <%= scope.lookupvar('amazon_ses::smtp_tls_ca_file') %>

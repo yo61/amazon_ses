@@ -13,12 +13,6 @@
 #   See http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html
 #   for additional details
 #
-# [*smtp_port*]
-#   The port used to connect to the Amazon SMTP server.
-#   The default is 587 as there are no limits. If you use port 25, than you will
-#   need to request that Amazon disables the rate limit (which is 1 email
-#   per minute).
-#
 # [*smtp_username*] 
 #   The username of the smtp user.  Note, this is not your IAM user.
 #   You need to create a unique user for the SES service.
@@ -28,6 +22,14 @@
 # [*smtp_password*]
 #   The password of the smtp user.
 #
+# [*inet_interfaces*]
+#   The interfaces to which postfix should bind
+#   Default: 'all'
+#
+# [*inet_interfaces*]
+#   The protocols postfix should use
+#   Default: 'all'
+#
 # [*ses_region*]
 #   The region of the Amazon smtp server to relay to.  Valid options:
 #   * 'US EAST' - The (N. Virginia) Region
@@ -35,13 +37,28 @@
 #   * 'EU' - The (Ireland) Region
 #   The default region is 'US EAST'
 #
-# [*inet_interfaces*]
-#   The interfaces to which postfix should bind
-#   Default: 'all'
+# [*smtp_port*]
+#   The port used to connect to the Amazon SMTP server.
+#   The default is 587 as there are no limits. If you use port 25, than you will
+#   need to request that Amazon disables the rate limit (which is 1 email
+#   per minute).
 #
-# [*inet_interfaces*]
-#   The protocols postfix should use
-#   Default: 'ipv4'
+# [*smtp_tls_ca_file*]
+#   A file containing CA certificates of root CAs trusted to sign either
+#   remote SMTP server certificates or intermediate CA certificates.
+#   If not specified the OS default location is used.
+#
+# [*smtpd_tls_cert_file*]
+#   File with the Postfix SMTP server RSA certificate in PEM format. This
+#   file may also contain the Postfix SMTP server pri vate RSA key.
+#   If not specified the OS default location is used.
+#
+# [*smtpd_tls_key_file*]
+#   File with the Postfix SMTP server RSA private key in PEM format. This
+#   file may be combined with the Postfix SMTP server RSA certificate file
+#   specified with $smtpd_tls_cert_file. The private key must be accessible
+#   without a pass-phrase, i.e. it must not be encrypted.
+#   If not specified the OS default location is used.
 #
 # === Variables
 #
@@ -80,13 +97,16 @@
 #
 class amazon_ses (
   $domain,
-  $smtp_port = 587,
   $smtp_username,
   $smtp_password,
-  $ses_region = 'US EAST',
   $inet_interfaces = 'all',
   $inet_protocols = 'all',
-){
+  $ses_region = $::amazon_ses::params::default_ses_region,
+  $smtp_port = $::amazon_ses::params::default_smtp_port,
+  $smtp_tls_ca_file = $::amazon_ses::params::default_smtp_tls_ca_file,
+  $smtpd_tls_cert_file = $::amazon_ses::params::default_smtpd_tls_cert_file,
+  $smtpd_tls_key_file = $::amazon_ses::params::default_smtpd_tls_key_file,
+) inherits ::amazon_ses::params {
 
   anchor { 'amazon_ses::begin': }
 
