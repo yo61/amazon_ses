@@ -111,6 +111,11 @@ The amazon_ses module's primary class, `amazon_ses`, guides the basic setup of p
    The region of the Amazon smtp server to relay to.  Amazon only offers [3 regions](http://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html) with 1 availability zone each.
 
    Valid options:
+   * `US EAST`
+   * `US WEST`
+   * `EU`
+
+   The following table shows the relationship between the puppet option and the region.
 
 | Puppet Option | Region Name | Region |
 | ------------- | ----------- | ------ |
