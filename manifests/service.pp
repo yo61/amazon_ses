@@ -16,7 +16,7 @@
 #
 class amazon_ses::service {
   service { 'postfix':
-    enable => true,
     ensure => running,
+    enable => true,
   }
 }
