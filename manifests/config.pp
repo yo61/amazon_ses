@@ -15,6 +15,12 @@
 #
 class amazon_ses::config {
   
+  # manage the postfix main configuration file 
+  file {'/etc/postfix/main.cf':
+    ensure  => file,
+    content => template('amazon_ses/main.cf.erb'),
+  }
+
   # setup passwords
   # note, its best practice to delete this file
   # however, it needs to exist in order for puppet
@@ -29,18 +35,15 @@ class amazon_ses::config {
     content => template('amazon_ses/sasl_passwd.erb')
   }
   
-  # create the db
+  # recreate the db if either file changes
   exec { 'create_db_file':
     command     => '/usr/sbin/postmap -r hash:/etc/postfix/sasl_passwd',
     cwd         => '/etc/postfix',
     refreshonly => true,
-    subscribe   => File['/etc/postfix/sasl_passwd'],
+    subscribe   => [
+      File['/etc/postfix/sasl_passwd'],
+      File['/etc/postfix/main.cf'],
+    ],
   }
 
-  # manage the postfix main configuration file 
-  file {'/etc/postfix/main.cf':
-    ensure  => file,
-    content => template('amazon_ses/main.cf.erb'),
-    require => Exec['create_db_file'],
-  }
 }
