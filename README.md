@@ -1,5 +1,6 @@
 # amazon_ses
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/conzar/amazon_ses.svg)](https://forge.puppetlabs.com/conzar/amazon_ses)
 [![Build Status](https://travis-ci.org/Conzar/amazon_ses.svg?branch=master)](https://travis-ci.org/Conzar/amazon_ses)
 
 ## Overview
