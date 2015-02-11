@@ -115,7 +115,7 @@ The amazon_ses module's primary class, `amazon_ses`, guides the basic setup of p
    * `US WEST`
    * `EU`
 
-   The following table shows the relationship between the puppet option and the region.
+The following table shows the relationship between the puppet option and the region.
 
 | Puppet Option | Region Name | Region |
 | ------------- | ----------- | ------ |
