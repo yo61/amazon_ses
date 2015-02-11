@@ -26,8 +26,8 @@
 #   The interfaces to which postfix should bind
 #   Default: 'all'
 #
-# [*inet_interfaces*]
-#   The protocols postfix should use
+# [*inet_protocols*]
+#   The protocols postfix should use. 'ipv4', 'ipv6', 'all'
 #   Default: 'all'
 #
 # [*ses_region*]
@@ -99,8 +99,8 @@ class amazon_ses (
   $domain,
   $smtp_username,
   $smtp_password,
-  $inet_interfaces = 'all',
-  $inet_protocols = 'all',
+  $inet_interfaces = $::amazon_ses::params::default_inet_interfaces,
+  $inet_protocols = $::amazon_ses::params::default_inet_protocols,
   $ses_region = $::amazon_ses::params::default_ses_region,
   $smtp_port = $::amazon_ses::params::default_smtp_port,
   $smtp_tls_ca_file = $::amazon_ses::params::default_smtp_tls_ca_file,

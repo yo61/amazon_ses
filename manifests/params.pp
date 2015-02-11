@@ -15,6 +15,10 @@
 #
 class amazon_ses::params{
 
+  $default_inet_interfaces = 'all'
+
+  $default_inet_protocols = 'all'
+
   $default_ses_region = 'US EAST'
 
   $default_smtp_port = 587
