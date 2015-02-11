@@ -111,19 +111,13 @@ The amazon_ses module's primary class, `amazon_ses`, guides the basic setup of p
    The region of the Amazon smtp server to relay to.  Amazon only offers [3 regions](http://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html) with 1 availability zone each.
 
    Valid options:
-   
 | Puppet Option | Region Name | Region |
 | ------------- | ----------- | ------ |
-| `US EAST`     | N. Virginia | us-east-1 
-| `US WEST`     | Oregon      | us-west-2 
-| `EU`          | Ireland     | eu-west-1 
+| `US EAST`     | N. Virginia | us-east-1
+| `US WEST`     | Oregon      | us-west-2
+| `EU`          | Ireland     | eu-west-1
 
-	The default region is `US EAST`
-
- * `US EAST` - The (N. Virginia) Region - us-east-1
- * `US WEST` - The (Oregon) Region - us-west-2
- * `EU` - The (Ireland) Region - eu-west-1
- * The default region is 'US EAST'
+The default region is `US EAST`
 
 ## Limitations
 
