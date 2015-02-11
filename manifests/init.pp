@@ -32,9 +32,14 @@
 #
 # [*ses_region*]
 #   The region of the Amazon smtp server to relay to.  Valid options:
-#   * 'US EAST' - The (N. Virginia) Region
-#   * 'US WEST' - The (Oregon) Region
-#   * 'EU' - The (Ireland) Region
+#   * 'US EAST'      - N. Virginia (us-east-1)
+#   * 'US WEST'      - Oregon (us-west-2)
+#   * 'EU'           - Ireland (eu-west-1)
+#   * 'us-east-1'    - uses 'US EAST'
+#   * 'us-west-1'    - uses 'US WEST'
+#   * 'us-west-2'    - uses 'US WEST'
+#   * 'eu-west-1'    - uses 'EU'
+#   * 'eu-central-1' - uses 'EU'
 #   The default region is 'US EAST'
 #
 # [*smtp_port*]
@@ -121,29 +126,43 @@ class amazon_ses (
     }
   }
 
-  # set the region specific details
-  case $ses_region {
-    'US EAST': {
-      $region_url  = "email-smtp.us-east-1.amazonaws.com:${smtp_port}"
-      $region_url2 = "ses-smtp-prod-335357831.us-east-1.elb.amazonaws.com:\
-${smtp_port}"
-    }
-    'US WEST': {
-      $region_url = "email-smtp.us-west-2.amazonaws.com:${smtp_port}"
-      $region_url2 = "ses-smtp-us-west-2-prod-14896026.us-west-2.elb.\
-amazonaws.com:${smtp_port}"
-    }
-    'EU':      {
-      $region_url = ":${smtp_port}"
-      $region_url2 = "ses-smtp-eu-west-1-prod-345515633.eu-west-1.elb.\
-amazonaws.com:${smtp_port}"
-    }
-    default:   {
-      # throw error 
-      fail("Invalid ses_region - ${ses_region}")
-    }
+  # Maps the real AWS regions to the SES service regions
+  # Previously-used keys added for backwards compatibility
+  $ses_region_map = {
+    'us-east-1'    => 'us_east',
+    'us-west-1'    => 'us_west',
+    'us-west-2'    => 'us_west',
+    'eu-west-1'    => 'eu',
+    'eu-central-1' => 'eu',
+    'US EAST'      => 'us_east',
+    'US WEST'      => 'us_west',
+    'EU'           => 'eu',
   }
-  
+
+  # Data for SES service by region
+  $ses_data = {
+    us_east => {
+      region_url  => "email-smtp.us-east-1.amazonaws.com:${smtp_port}",
+      region_url2 => "ses-smtp-prod-335357831.us-east-1.elb.amazonaws.com:${smtp_port}",
+    },
+    us_west => {
+      region_url  => "email-smtp.us-west-2.amazonaws.com:${smtp_port}",
+      region_url2 => "ses-smtp-us-west-2-prod-14896026.us-west-2.elb.amazonaws.com:${smtp_port}",
+    },
+    eu => {
+      region_url  => "email-smtp.eu-west-1.amazonaws.com:${smtp_port}",
+      region_url2 => "ses-smtp-eu-west-1-prod-345515633.eu-west-1.elb.amazonaws.com:${smtp_port}",
+    },
+  }
+
+  if has_key($ses_region_map, $ses_region) {
+    $region_url = $ses_data[$ses_region_map[$ses_region]][region_url]
+    $region_url2 = $ses_data[$ses_region_map[$ses_region]][region_url2]
+  }
+  else {
+    fail("${ses_region} - Invalid ses_region")
+  }
+
   class {'amazon_ses::install':
     require => Anchor['amazon_ses::begin'],
   }
